@@ -64,18 +64,17 @@ src: url(data:application/x-font-ttf;charset=utf-8;base64,AAEAAAARAQAABAAQRFNJRw
             try {
                 // Get query parameters from the URL
                 const params = new URLSearchParams(window.location.search);
-                const videoId = params.get("video_id");
-
-                if (!videoId) {
-                    document.body.innerHTML = "<h2 style='color:white;text-align:center;'>Error: Missing video_id parameter.</h2>";
-                    return;
-                }
+                const videoId = params.get("videoId");
+                const user = params.get("user");
+                const userId = params.get("userId");
 
                 // Sanitize videoId to prevent injection
                 const safeVideoId = encodeURIComponent(videoId);
+                const safeUser = encodeURIComponent(user);
+                const safeUserId = encodeURIComponent(userId);
 
                 // Build the embed URL
-                const embedUrl = `apiserver=https%3A%2F%2Fflashthemes.net%2F&amp;storePath=https%3A%2F%2Fflashthemes.net%2Fstatic%2Fstore%2F%3Cstore%3E&amp;isEmbed=1&amp;tlist=2016&amp;has_asset_char=1&amp;ctc=go&amp;initcb=studioLoaded&amp;collab=0&amp;ut=50&amp;v=196368&amp;bs=default&amp;appCode=go&amp;siteId=0&amp;lid=0&amp;retut=0&amp;isLogin=Y&amp;bgload=https%3A%2F%2Flightspeed.flashthemes.net%2Fstatic%2Fanimation%2Fnew7286%2Fstudio.swf&amp;userId=196368&amp;movieOwnerId=196368&amp;movieOwner=sebom39207%40bipochub.com&amp;tlang=en_US&amp;isWide=1&amp;tray=custom&amp;upl=1&amp;hb=1&amp;pts=0&amp;themeId=custom&amp;tm=FIN&amp;movieId=${safeVideoId}&amp;lang=en&amp;nextUrl=https%3A%2F%2Fflashthemes.net%2Fmovie%2F%3CmovieId%3E&amp;is_published=1&amp;is_private_shared=0&amp;is_password_protected=false&amp;clientThemePath=https%3A%2F%2Flightspeed.flashthemes.net%2Fstatic%2Fct%2Fad44370a650793d9%2F%3Cclient_theme%3E&amp;movieLid=0`;
+                const embedUrl = `apiserver=https%3A%2F%2Fflashthemes.net%2F&amp;storePath=https%3A%2F%2Fflashthemes.net%2Fstatic%2Fstore%2F%3Cstore%3E&amp;isEmbed=1&amp;tlist=2016&amp;has_asset_char=1&amp;ctc=go&amp;initcb=studioLoaded&amp;collab=0&amp;ut=50&amp;v=${safeUserId}&amp;bs=default&amp;appCode=go&amp;siteId=0&amp;lid=0&amp;retut=0&amp;isLogin=Y&amp;bgload=https%3A%2F%2Flightspeed.flashthemes.net%2Fstatic%2Fanimation%2Fnew7286%2Fstudio.swf&amp;userId=${safeUserId}&amp;movieOwnerId=${safeUserId}&amp;movieOwner=${safeUser}&amp;tlang=en_US&amp;isWide=1&amp;tray=custom&amp;upl=1&amp;hb=1&amp;pts=0&amp;themeId=custom&amp;tm=FIN&amp;movieId=${safeVideoId}&amp;lang=en&amp;nextUrl=https%3A%2F%2Fflashthemes.net%2Fmovie%2F%3CmovieId%3E&amp;is_published=1&amp;is_private_shared=0&amp;is_password_protected=false&amp;clientThemePath=https%3A%2F%2Flightspeed.flashthemes.net%2Fstatic%2Fct%2Fad44370a650793d9%2F%3Cclient_theme%3E&amp;movieLid=0`;
 
                 // Set iframe source
                 document.getElementById("videoFrame").value = embedUrl;
